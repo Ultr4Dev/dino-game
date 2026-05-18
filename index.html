@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Skin Code Generator</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #4da6ff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            border: 2px solid #0055ff;
+            background-color: #00051a;
+            padding: 25px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 15px rgba(0, 85, 255, 0.3);
+        }
+        h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #0055ff;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        label {
+            flex: 1;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            flex: 1;
+            background-color: #001133;
+            color: #4da6ff;
+            border: 1px solid #0055ff;
+            padding: 8px;
+            font-family: inherit;
+        }
+        input[type="color"] {
+            flex: 1;
+            height: 35px;
+            background-color: #001133;
+            border: 1px solid #0055ff;
+            cursor: pointer;
+        }
+        .divider {
+            height: 1px;
+            background-color: #0055ff;
+            margin: 20px 0;
+        }
+        .output-box {
+            background-color: #001133;
+            border: 1px dashed #0055ff;
+            padding: 15px;
+            text-align: center;
+            word-break: break-all;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            background-color: #0055ff;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #3377ff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>SKIN CODE GENERATOR</h2>
+    
+    <div class="form-group">
+        <label for="species">Species:</label>
+        <input type="text" id="species" value="Herrerasaurus">
+    </div>
+    
+    <div class="form-group">
+        <label for="pattern">Pattern (0-9):</label>
+        <input type="number" id="pattern" value="0" min="0" max="9">
+    </div>
+    <div class="form-group">
+        <label for="variation">Variation (0-9):</label>
+        <input type="number" id="variation" value="1" min="0" max="9">
+    </div>
+    <div class="form-group">
+        <label for="theme">Theme (0-9):</label>
+        <input type="number" id="theme" value="0" min="0" max="9">
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="form-group">
+        <label for="color1">Male Display:</label>
+        <input type="color" id="color1" value="#AAA382">
+    </div>
+    <div class="form-group">
+        <label for="color2">Markings:</label>
+        <input type="color" id="color2" value="#AFC35F">
+    </div>
+    <div class="form-group">
+        <label for="color3">Flank:</label>
+        <input type="color" id="color3" value="#727F4D">
+    </div>
+    <div class="form-group">
+        <label for="color4">Body:</label>
+        <input type="color" id="color4" value="#4B5849">
+    </div>
+    <div class="form-group">
+        <label for="color5">Underbelly:</label>
+        <input type="color" id="color5" value="#945556">
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="output-box" id="outputCode"></div>
+    
+    <button onclick="copyCode()" id="copyBtn">Copy Code to Clipboard</button>
+</div>
+
+<script>
+    const inputs = document.querySelectorAll('input');
+    const outputDisplay = document.getElementById('outputCode');
+    const copyBtn = document.getElementById('copyBtn');
+
+    function formatColor(hexString) {
+        return hexString.replace('#', '').toUpperCase() + 'FF';
+    }
+
+    function generateCode() {
+        const species = document.getElementById('species').value;
+        const pattern = document.getElementById('pattern').value;
+        const variation = document.getElementById('variation').value;
+        const theme = document.getElementById('theme').value;
+        
+        const c1 = formatColor(document.getElementById('color1').value); // Male Display
+        const c2 = formatColor(document.getElementById('color2').value); // Markings
+        const c3 = formatColor(document.getElementById('color3').value); // Flank
+        const c4 = formatColor(document.getElementById('color4').value); // Body
+        const c5 = formatColor(document.getElementById('color5').value); // Underbelly
+
+        const finalCode = `${species}${pattern}${variation}${theme}${c5}${c4}${c3}${c2}${c1}`;
+        outputDisplay.textContent = finalCode;
+        
+        copyBtn.textContent = "Copy Code to Clipboard";
+    }
+
+    function copyCode() {
+        navigator.clipboard.writeText(outputDisplay.textContent).then(() => {
+            copyBtn.textContent = "Copied!";
+        });
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener('input', generateCode);
+    });
+
+    generateCode();
+</script>
+
+</body>
+</html>
