@@ -91,6 +91,14 @@
 <div class="container">
     <h2>SKIN CODE GENERATOR</h2>
     
+    <div class="form-group" style="margin-bottom: 20px;">
+        <label for="importInput" style="flex: 0.8;">Import Code:</label>
+        <input type="text" id="importInput" placeholder="Paste skin code here..." style="margin-right: 10px; flex: 1.5;">
+        <button id="importBtn" onclick="importCode()" style="width: auto; padding: 8px 15px; font-size: 0.9em; flex: 0.7;">Import</button>
+    </div>
+
+    <div class="divider"></div>
+    
     <div class="form-group">
         <label for="species">Species:</label>
         <input type="text" id="species" value="Herrerasaurus">
@@ -170,6 +178,58 @@
         navigator.clipboard.writeText(outputDisplay.textContent).then(() => {
             copyBtn.textContent = "Copied!";
         });
+    }
+
+    function importCode() {
+        const importInput = document.getElementById('importInput');
+        const code = importInput.value.trim();
+        
+        if (!code) {
+            alert("Please paste a skin code to import.");
+            return;
+        }
+
+        const L = code.length;
+        if (L < 44) {
+            alert("Invalid skin code. The code is too short.");
+            return;
+        }
+
+        const species = code.substring(0, L - 43);
+        const pattern = code.charAt(L - 43);
+        const variation = code.charAt(L - 42);
+        const theme = code.charAt(L - 41);
+
+        if (isNaN(pattern) || isNaN(variation) || isNaN(theme)) {
+            alert("Invalid skin code. Pattern, variation, and theme must be numeric digits.");
+            return;
+        }
+
+        const c5 = code.substring(L - 40, L - 32);
+        const c4 = code.substring(L - 32, L - 24);
+        const c3 = code.substring(L - 24, L - 16);
+        const c2 = code.substring(L - 16, L - 8);
+        const c1 = code.substring(L - 8, L);
+
+        const hexRegex = /^[0-9A-F]{8}$/i;
+        if (!hexRegex.test(c5) || !hexRegex.test(c4) || !hexRegex.test(c3) || !hexRegex.test(c2) || !hexRegex.test(c1)) {
+            alert("Invalid skin code. Color segments are malformed.");
+            return;
+        }
+
+        document.getElementById('species').value = species;
+        document.getElementById('pattern').value = pattern;
+        document.getElementById('variation').value = variation;
+        document.getElementById('theme').value = theme;
+
+        document.getElementById('color1').value = '#' + c1.substring(0, 6);
+        document.getElementById('color2').value = '#' + c2.substring(0, 6);
+        document.getElementById('color3').value = '#' + c3.substring(0, 6);
+        document.getElementById('color4').value = '#' + c4.substring(0, 6);
+        document.getElementById('color5').value = '#' + c5.substring(0, 6);
+
+        generateCode();
+        importInput.value = '';
     }
 
     inputs.forEach(input => {
