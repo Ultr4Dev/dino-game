@@ -6,215 +6,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Isle Skin Editor</title>
-    <style>
-        body {
-            background-color: #000000;
-            color: #4da6ff;
-            font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-            margin: 0;
-        }
+    <link rel="stylesheet" href="static/style.css">
+    <meta name="description"
+        content="A web-based skin code generator for The Isle, allowing users to create and customize dinosaur skins with an intuitive interface.">
+    <meta name="keywords"
+        content="The Isle, skin code generator, dinosaur skins, web-based tool, customization, pattern, variation, theme, color selection">
 
-        .container {
-            border: 2px solid #0055ff;
-            background-color: #00051a;
-            padding: 25px;
-            width: 100%;
-            max-width: 500px;
-            box-shadow: 0 0 15px rgba(0, 85, 255, 0.3);
-        }
-
-        h2 {
-            margin-top: 0;
-            border-bottom: 1px solid #0055ff;
-            padding-bottom: 10px;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        label {
-            flex: 1;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            flex: 1;
-            background-color: #001133;
-            color: #4da6ff;
-            border: 1px solid #0055ff;
-            padding: 8px;
-            font-family: inherit;
-        }
-
-        input[type="color"] {
-            flex: 1;
-            height: 35px;
-            background-color: #001133;
-            border: 1px solid #0055ff;
-            cursor: pointer;
-        }
-
-        .disabled-setting {
-            opacity: 0.45;
-        }
-
-        .divider {
-            height: 1px;
-            background-color: #0055ff;
-            margin: 20px 0;
-        }
-
-        .output-box {
-            background-color: #001133;
-            border: 1px dashed #0055ff;
-            padding: 15px;
-            text-align: center;
-            word-break: break-all;
-            font-size: 1.1em;
-            letter-spacing: 1px;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-
-        button {
-            width: 100%;
-            background-color: #0055ff;
-            color: #ffffff;
-            border: none;
-            padding: 12px;
-            font-size: 1.1em;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background-color: #3377ff;
-        }
-    </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h2 id="title">SKIN CODE GENERATOR</h2>
+    <div class="layout">
+        <div class="container" style="max-width: 400px;">
+            <h2 id="title">SKIN CODE GENERATOR</h2>
 
-        <div>
-            <p id="gameInfo"></p>
-            <p>Might not be compatible with other versions or game branches.</p>
-        </div>
-        <div class="divider"></div>
-        <div class="form-group" style="margin-bottom: 20px;">
-            <label for="importInput" style="flex: 0.8;">Import Code:</label>
-            <input type="text" id="importInput" placeholder="Paste skin code here..."
-                style="margin-right: 10px; flex: 1.5;">
-            <button id="importBtn" onclick="importCode()"
-                style="width: auto; padding: 8px 15px; font-size: 0.9em; flex: 0.7;">Import</button>
+            <div>
+                <p id="gameInfo"></p>
+                <p>Might not be compatible with other versions or game branches.</p>
+            </div>
+            <div class="divider"></div>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="importInput" style="flex: 0.8;">Import Code:</label>
+                <input type="text" id="importInput" placeholder="Paste skin code here..."
+                    style="margin-right: 10px; flex: 1.5;">
+                <button id="importBtn" onclick="importCode()"
+                    style="width: auto; padding: 8px 15px; font-size: 0.9em; flex: 0.7;">Import</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label for="species">Species:</label>
+                <select id="species">
+                    <option value="" selected>None</option>
+                    <optgroup label="Herbivores">
+                        <option value="Diabloceratops">Diabloceratops</option>
+                        <option value="Dryosaurus">Dryosaurus</option>
+                        <option value="Hypsilophodon">Hypsilophodon</option>
+                        <option value="Kentrosaurus">Kentrosaurus</option>
+                        <option value="Maiasaura">Maiasaura</option>
+                        <option value="Pachycephalosaurus">Pachycephalosaurus</option>
+                        <option value="Stegosaurus">Stegosaurus</option>
+                        <option value="Tenontosaurus">Tenontosaurus</option>
+                        <option value="Triceratops">Triceratops</option>
+                    </optgroup>
+                    <optgroup label="Carnivores">
+                        <option value="Allosaurus">Allosaurus</option>
+                        <option value="Austroraptor">Austroraptor</option>
+                        <option value="Carnotaurus">Carnotaurus</option>
+                        <option value="Ceratosaurus">Ceratosaurus</option>
+                        <option value="Deinosuchus">Deinosuchus</option>
+                        <option value="Dilophosaurus">Dilophosaurus</option>
+                        <option value="Herrerasaurus">Herrerasaurus</option>
+                        <option value="Omniraptor">Omniraptor</option>
+                        <option value="Pteranodon">Pteranodon</option>
+                        <option value="Troodon">Troodon</option>
+                        <option value="Tyrannosaurus">Tyrannosaurus</option>
+                    </optgroup>
+                    <optgroup label="Omnivores">
+                        <option value="Beipiaosaurus">Beipiaosaurus</option>
+                        <option value="Gallimimus">Gallimimus</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="pattern">Pattern (0-9):</label>
+                <input type="number" id="pattern" value="0" min="0" max="9">
+            </div>
+            <div class="form-group">
+                <label for="variation">Variation (0-9):</label>
+                <input type="number" id="variation" value="1" min="0" max="9">
+            </div>
+            <div class="form-group">
+                <label for="theme">Theme (0-9):</label>
+                <input type="number" id="theme" value="0" min="0" max="9">
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label for="color1">Male Display:</label>
+                <input type="color" id="color1" value="#FFFFFF">
+            </div>
+            <div class="form-group">
+                <label for="color2">Markings:</label>
+                <input type="color" id="color2" value="#FFFFFF">
+            </div>
+            <div class="form-group">
+                <label for="color3">Flank:</label>
+                <input type="color" id="color3" value="#FFFFFF">
+            </div>
+            <div class="form-group">
+                <label for="color4">Body:</label>
+                <input type="color" id="color4" value="#FFFFFF">
+            </div>
+            <div class="form-group">
+                <label for="color5">Underbelly:</label>
+                <input type="color" id="color5" value="#FFFFFF">
+            </div>
+            <div class="form-group">
+                <label for="color6">Teeth:</label>
+                <input type="color" id="color6" value="#FFFFFF">
+            </div>
+            <div class="form-group">
+                <label for="color7">Mouth:</label>
+                <input type="color" id="color7" value="#FFFFFF">
+            </div>
+            <div class="form-group">
+                <label for="color8">Claws:</label>
+                <input type="color" id="color8" value="#FFFFFF">
+            </div>
+            <div class="divider"></div>
+
+            <div class="output-box" id="outputCode"></div>
+
+            <button onclick="copyCode()" id="copyBtn">Copy Code to Clipboard</button>
+            <button onclick="addToHistory()" id="saveHistoryBtn">Save to History</button>
         </div>
 
-        <div class="divider"></div>
+        <div class="container secondary-container">
+            <h2>Skin Code History</h2>
+            <p>Previous skin codes will be displayed here for easy access and management.</p>
 
-        <div class="form-group">
-            <label for="species">Species:</label>
-            <select id="species">
-                <option value="" selected>None</option>
-                <optgroup label="Herbivores">
-                    <option value="Diabloceratops">Diabloceratops</option>
-                    <option value="Dryosaurus">Dryosaurus</option>
-                    <option value="Hypsilophodon">Hypsilophodon</option>
-                    <option value="Kentrosaurus">Kentrosaurus</option>
-                    <option value="Maiasaura">Maiasaura</option>
-                    <option value="Pachycephalosaurus">Pachycephalosaurus</option>
-                    <option value="Stegosaurus">Stegosaurus</option>
-                    <option value="Tenontosaurus">Tenontosaurus</option>
-                    <option value="Triceratops">Triceratops</option>
-                </optgroup>
-                <optgroup label="Carnivores">
-                    <option value="Allosaurus">Allosaurus</option>
-                    <option value="Austroraptor">Austroraptor</option>
-                    <option value="Carnotaurus">Carnotaurus</option>
-                    <option value="Ceratosaurus">Ceratosaurus</option>
-                    <option value="Deinosuchus">Deinosuchus</option>
-                    <option value="Dilophosaurus">Dilophosaurus</option>
-                    <option value="Herrerasaurus">Herrerasaurus</option>
-                    <option value="Omniraptor">Omniraptor</option>
-                    <option value="Pteranodon">Pteranodon</option>
-                    <option value="Troodon">Troodon</option>
-                    <option value="Tyrannosaurus">Tyrannosaurus</option>
-                </optgroup>
-                <optgroup label="Omnivores">
-                    <option value="Beipiaosaurus">Beipiaosaurus</option>
-                    <option value="Gallimimus">Gallimimus</option>
-                </optgroup>
-            </select>
+            <table id="historyTable" class="table-container">
+                <thead>
+                    <tr>
+                        <th>Species</th>
+                        <th>Pattern</th>
+                        <th>Variation</th>
+                        <th>Theme</th>
+                        <th>Male Display</th>
+                        <th>Markings</th>
+                        <th>Flank</th>
+                        <th>Body</th>
+                        <th>Underbelly</th>
+                        <th>Teeth</th>
+                        <th>Mouth</th>
+                        <th>Claws</th>
+                    </tr>
+                </thead>
+                <tbody id="historyBody">
+                    <tr>
+                        <td colspan="12" style="text-align: center; color: #777;">No skin codes generated yet.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <div class="form-group">
-            <label for="pattern">Pattern (0-9):</label>
-            <input type="number" id="pattern" value="0" min="0" max="9">
-        </div>
-        <div class="form-group">
-            <label for="variation">Variation (0-9):</label>
-            <input type="number" id="variation" value="1" min="0" max="9">
-        </div>
-        <div class="form-group">
-            <label for="theme">Theme (0-9):</label>
-            <input type="number" id="theme" value="0" min="0" max="9">
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="form-group">
-            <label for="color1">Male Display:</label>
-            <input type="color" id="color1" value="#FFFFFF">
-        </div>
-        <div class="form-group">
-            <label for="color2">Markings:</label>
-            <input type="color" id="color2" value="#FFFFFF">
-        </div>
-        <div class="form-group">
-            <label for="color3">Flank:</label>
-            <input type="color" id="color3" value="#FFFFFF">
-        </div>
-        <div class="form-group">
-            <label for="color4">Body:</label>
-            <input type="color" id="color4" value="#FFFFFF">
-        </div>
-        <div class="form-group">
-            <label for="color5">Underbelly:</label>
-            <input type="color" id="color5" value="#FFFFFF">
-        </div>
-        <div class="form-group">
-            <label for="color6">Teeth:</label>
-            <input type="color" id="color6" value="#FFFFFF">
-        </div>
-        <div class="form-group">
-            <label for="color7">Mouth:</label>
-            <input type="color" id="color7" value="#FFFFFF">
-        </div>
-        <div class="form-group">
-            <label for="color8">Claws:</label>
-            <input type="color" id="color8" value="#FFFFFF">
-        </div>
-        <div class="divider"></div>
-
-        <div class="output-box" id="outputCode"></div>
-
-        <button onclick="copyCode()" id="copyBtn">Copy Code to Clipboard</button>
     </div>
 
     <script>
+        window.addEventListener('load', () => {
+            const lastCode = localStorage.getItem('lastSkinCode');
+            if (lastCode) {
+                document.getElementById('importInput').value = lastCode;
+                importCode();
+            }
+            renderHistoryTable();
+        });
         const inputs = document.querySelectorAll('input, select');
         const outputDisplay = document.getElementById('outputCode');
         const copyBtn = document.getElementById('copyBtn');
@@ -222,6 +171,8 @@
         const notLimitedDinosaurs = ['Omniraptor'];
 
         window.addEventListener('load', updateMeta);
+        
+
         function updateMeta() {
             // Load manifest.json
             fetch('manifest.json')
@@ -266,7 +217,46 @@
             return hexString.replace('#', '').toUpperCase() + 'FF';
         }
 
-        function generateCode() {
+        function getSwatchCell(colorCode) {
+            if (!colorCode || colorCode === 'N/A') {
+                return '<td class="empty-color">N/A</td>';
+            }
+
+            const swatchColor = '#' + colorCode.substring(0, 6);
+            return `<td><span class="color-swatch" title="${swatchColor}" style="background-color: ${swatchColor};"></span></td>`;
+        }
+
+        function renderHistoryTable() {
+            const history = JSON.parse(localStorage.getItem('history')) || [];
+            const historyBody = document.getElementById('historyBody');
+
+            if (history.length === 0) {
+                historyBody.innerHTML = '<tr><td colspan="12" style="text-align: center; color: #777;">No skin codes generated yet.</td></tr>';
+                return;
+            }
+
+            historyBody.innerHTML = '';
+            history.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.species || 'N/A'}</td>
+                    <td>${entry.pattern || 'N/A'}</td>
+                    <td>${entry.variation || 'N/A'}</td>
+                    <td>${entry.theme || 'N/A'}</td>
+                    ${getSwatchCell(entry.maleDisplay)}
+                    ${getSwatchCell(entry.markings)}
+                    ${getSwatchCell(entry.flank)}
+                    ${getSwatchCell(entry.body)}
+                    ${getSwatchCell(entry.underbelly)}
+                    ${getSwatchCell(entry.teeth)}
+                    ${getSwatchCell(entry.mouth)}
+                    ${getSwatchCell(entry.claws)}
+                `;
+                historyBody.appendChild(row);
+            });
+        }
+
+        function generateCode(saveToStorage = true) {
             const species = document.getElementById('species').value;
             updateOmniraptorOnlySettings();
             const pattern = document.getElementById('pattern').value;
@@ -291,6 +281,11 @@
             outputDisplay.textContent = finalCode;
 
             copyBtn.textContent = "Copy Code to Clipboard";
+            if (saveToStorage) {
+                localStorage.setItem('lastSkinCode', finalCode);
+            }
+            
+
         }
 
         function copyCode() {
@@ -394,7 +389,29 @@
             input.addEventListener('input', generateCode);
         });
 
-        generateCode();
+        function addToHistory() {
+            current_history = JSON.parse(localStorage.getItem('history')) || [];
+            let code = outputDisplay.textContent;
+            let dinoColors = {
+                species: document.getElementById('species').value || 'N/A',
+                pattern: document.getElementById('pattern').value || 'N/A',
+                variation: document.getElementById('variation').value || 'N/A',
+                theme: document.getElementById('theme').value || 'N/A',
+                maleDisplay: code.substring(code.length - 8, code.length - 0),
+                markings: code.substring(code.length - 16, code.length - 8),
+                flank: code.substring(code.length - 24, code.length - 16),
+                body: code.substring(code.length - 32, code.length - 24),
+                underbelly: code.substring(code.length - 40, code.length - 32),
+                teeth: code.length >= 64 ? code.substring(code.length - 48, code.length - 40) : null,
+                mouth: code.length >= 64 ? code.substring(code.length - 56, code.length - 48) : null,
+                claws: code.length >= 64 ? code.substring(code.length - 64, code.length - 56) : null
+            };
+            current_history.push(dinoColors);
+            localStorage.setItem(`history`, JSON.stringify(current_history));
+            renderHistoryTable();
+        }
+
+        generateCode(false);
     </script>
 
 </body>

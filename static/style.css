@@ -1,0 +1,154 @@
+body {
+    background-color: #000000;
+    color: #4da6ff;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+}
+
+.layout {
+    width: 100%;
+    max-width: 1500px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.container {
+    border: 2px solid #0055ff;
+    background-color: #00051a;
+    padding: 25px;
+    width: 100%;
+    max-width: none;
+    flex: 1;
+    min-width: 320px;
+    box-shadow: 0 0 15px rgba(0, 85, 255, 0.3);
+}
+
+.secondary-container p {
+    line-height: 1.5;
+}
+
+h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #0055ff;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+label {
+    flex: 1;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    flex: 1;
+    background-color: #001133;
+    color: #4da6ff;
+    border: 1px solid #0055ff;
+    padding: 8px;
+    font-family: inherit;
+}
+
+input[type="color"] {
+    flex: 1;
+    height: 35px;
+    background-color: #001133;
+    border: 1px solid #0055ff;
+    cursor: pointer;
+}
+
+.disabled-setting {
+    opacity: 0.45;
+}
+
+.divider {
+    height: 1px;
+    background-color: #0055ff;
+    margin: 20px 0;
+}
+
+.output-box {
+    background-color: #001133;
+    border: 1px dashed #0055ff;
+    padding: 15px;
+    text-align: center;
+    word-break: break-all;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 100%;
+    background-color: #0055ff;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background-color: #3377ff;
+}
+
+@media (max-width: 90%) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .container {
+        min-width: 0;
+    }
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #0055ff;
+    background-color: #001133;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 85, 255, 0.2);
+}
+
+#historyTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#historyTable th,
+#historyTable td {
+    border: 1px solid rgba(77, 166, 255, 0.25);
+    padding: 8px;
+    text-align: center;
+}
+
+.color-swatch {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #4da6ff;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.empty-color {
+    color: #7b96b8;
+    font-size: 0.9em;
+}
