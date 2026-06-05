@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-    border: 2px solid #0055ff;
+    border: 2px solid #1646aa;
     background-color: #00051a;
     padding: 25px;
     width: 100%;
@@ -33,7 +33,7 @@ body {
 
 h2 {
     margin-top: 0;
-    border-bottom: 1px solid #0055ff;
+    border-bottom: 1px solid #1646aa;
     padding-bottom: 10px;
     text-align: center;
 }
@@ -56,7 +56,7 @@ select {
     flex: 1;
     background-color: #001133;
     color: #4da6ff;
-    border: 1px solid #0055ff;
+    border: 1px solid #1646aa;
     padding: 8px;
     font-family: inherit;
 }
@@ -65,7 +65,7 @@ input[type="color"] {
     flex: 1;
     height: 35px;
     background-color: #001133;
-    border: 1px solid #0055ff;
+    border: 1px solid #1646aa;
     cursor: pointer;
 }
 
@@ -75,13 +75,13 @@ input[type="color"] {
 
 .divider {
     height: 1px;
-    background-color: #0055ff;
+    background-color: #1646aa;
     margin: 20px 0;
 }
 
 .output-box {
     background-color: #001133;
-    border: 1px dashed #0055ff;
+    border: 1px dashed #1646aa;
     padding: 15px;
     text-align: center;
     word-break: break-all;
@@ -93,7 +93,7 @@ input[type="color"] {
 
 button {
     width: 100%;
-    background-color: #0055ff;
+    background-color: #1646aa;
     color: #ffffff;
     border: none;
     padding: 12px;
@@ -121,7 +121,7 @@ button:hover {
 .table-container {
     width: 100%;
     overflow-x: auto;
-    border: 1px solid #0055ff;
+    border: 1px solid #1646aa;
     background-color: #001133;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 85, 255, 0.2);
