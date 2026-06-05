@@ -122,6 +122,7 @@
             <div class="output-box" id="outputCode"></div>
 
             <button onclick="copyCode()" id="copyBtn">Copy Code to Clipboard</button>
+            <div class="divider"></div>
             <button onclick="addToHistory()" id="saveHistoryBtn">Save to History</button>
         </div>
 
@@ -136,14 +137,8 @@
                         <th>Pattern</th>
                         <th>Variation</th>
                         <th>Theme</th>
-                        <th>Male Display</th>
-                        <th>Markings</th>
-                        <th>Flank</th>
-                        <th>Body</th>
-                        <th>Underbelly</th>
-                        <th>Teeth</th>
-                        <th>Mouth</th>
-                        <th>Claws</th>
+                        <th>Colour</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="historyBody">
@@ -171,7 +166,7 @@
         const notLimitedDinosaurs = ['Omniraptor'];
 
         window.addEventListener('load', updateMeta);
-        
+
 
         function updateMeta() {
             // Load manifest.json
@@ -217,13 +212,13 @@
             return hexString.replace('#', '').toUpperCase() + 'FF';
         }
 
-        function getSwatchCell(colorCode) {
+        function getSwatchCell(colorCode, colourName = '') {
             if (!colorCode || colorCode === 'N/A') {
-                return '<td class="empty-color">N/A</td>';
+                return '';
             }
 
             const swatchColor = '#' + colorCode.substring(0, 6);
-            return `<td><span class="color-swatch" title="${swatchColor}" style="background-color: ${swatchColor};"></span></td>`;
+            return `<span class="color-swatch" title="${swatchColor}" style="background-color: ${swatchColor};">${colourName}</span>`;
         }
 
         function renderHistoryTable() {
@@ -236,24 +231,39 @@
             }
 
             historyBody.innerHTML = '';
-            history.forEach(entry => {
+            history.forEach((entry, index) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${entry.species || 'N/A'}</td>
                     <td>${entry.pattern || 'N/A'}</td>
                     <td>${entry.variation || 'N/A'}</td>
                     <td>${entry.theme || 'N/A'}</td>
-                    ${getSwatchCell(entry.maleDisplay)}
-                    ${getSwatchCell(entry.markings)}
-                    ${getSwatchCell(entry.flank)}
-                    ${getSwatchCell(entry.body)}
-                    ${getSwatchCell(entry.underbelly)}
-                    ${getSwatchCell(entry.teeth)}
-                    ${getSwatchCell(entry.mouth)}
-                    ${getSwatchCell(entry.claws)}
+                    <td>${getSwatchCell(entry.maleDisplay, 'Male Display')}
+                    ${getSwatchCell(entry.markings, 'Markings')}
+                    ${getSwatchCell(entry.flank, 'Flank')}
+                    ${getSwatchCell(entry.body, 'Body')}
+                    ${getSwatchCell(entry.underbelly, 'Underbelly')}
+                    ${getSwatchCell(entry.teeth, 'Teeth')}
+                    ${getSwatchCell(entry.mouth, 'Mouth')}
+                    ${getSwatchCell(entry.claws, 'Claws')}</td>
+                    <td><button class="history-import-btn" onclick="importFromHistory(${index})">Import</button></td>
                 `;
                 historyBody.appendChild(row);
             });
+        }
+
+        function importFromHistory(index) {
+            const history = JSON.parse(localStorage.getItem('history')) || [];
+            const entry = history[index];
+
+            if (!entry) {
+                alert('History entry not found.');
+                return;
+            }
+
+            const importedCode = entry.code || `${entry.species || ''}${entry.pattern || ''}${entry.variation || ''}${entry.theme || ''}${entry.claws || ''}${entry.mouth || ''}${entry.teeth || ''}${entry.underbelly || ''}${entry.body || ''}${entry.flank || ''}${entry.markings || ''}${entry.maleDisplay || ''}`;
+            document.getElementById('importInput').value = importedCode;
+            importCode();
         }
 
         function generateCode(saveToStorage = true) {
@@ -284,7 +294,7 @@
             if (saveToStorage) {
                 localStorage.setItem('lastSkinCode', finalCode);
             }
-            
+
 
         }
 
@@ -393,6 +403,7 @@
             current_history = JSON.parse(localStorage.getItem('history')) || [];
             let code = outputDisplay.textContent;
             let dinoColors = {
+                code: code,
                 species: document.getElementById('species').value || 'N/A',
                 pattern: document.getElementById('pattern').value || 'N/A',
                 variation: document.getElementById('variation').value || 'N/A',
