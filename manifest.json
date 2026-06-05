@@ -1,0 +1,9 @@
+{
+    "name": "The Isle Skin Editor",
+    "version": "1.1",
+    "game": {
+        "latest_tested_version": "0.21.659",
+        "developed_for_game_branch": "hordetest"
+    },
+    "description": "A web-based skin editor for the game \"The Isle\". It allows users to create and customize skins for their dinosaurs, providing an intuitive interface for selecting colors and generating skin codes."
+}

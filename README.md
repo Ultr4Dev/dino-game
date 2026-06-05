@@ -1,7 +1,8 @@
-# Dino Skin Code Generator (The Isle)
+# Dino game Skin Code Generator (The Isle)
 
 A lightweight, browser-based tool designed to generate custom skin codes for the game *The Isle*. This tool allows players to easily select their dinosaur species, patterns, and specific color regions, and instantly compiles them into a ready-to-paste game code.
 
+[Latest Version is available here](https://ultr4dev.github.io/dino-game/)
 ---
 
 ## 🦖 Features
@@ -38,11 +39,11 @@ A lightweight, browser-based tool designed to generate custom skin codes for the
 ## 🧬 Code Structure
 
 The output string is concatenated in the exact reverse-color order required by the game engine:
-`[Species][Pattern][Variation][Theme][Underbelly][Body][Flank][Markings][Male Display]`
+`[Species][Pattern][Variation][Theme][Claws][Mouth][Teeth][Underbelly][Body][Flank][Markings][Male Display]`
 
 *Example Output:*
-`Herrerasaurus010945556FF4B5849FF727F4DFFAFC35FFFAAA382FF`
-
+* `Omniraptor0108F3838FFEB4747FFBAB5B5FF5C5757FF704242FF711919FF0400FFFFFF0000FF`
+* `Dryosaurus0105C5757FF704242FF711919FF0400FFFFFF0000FF`
 ---
 
 ## 📄 License
