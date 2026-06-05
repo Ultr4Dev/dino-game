@@ -216,6 +216,9 @@ function importCode() {
 
 function renderHistoryTable() {
     const history = JSON.parse(localStorage.getItem('history')) || [];
+    
+    history.reverse();
+    
     const historyBody = document.getElementById('historyBody');
 
     if (history.length === 0) {
