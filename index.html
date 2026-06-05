@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Isle Skin Editor</title>
     <style>
         body {
@@ -107,12 +108,13 @@
 <body>
 
     <div class="container">
-        <h2>SKIN CODE GENERATOR</h2>
+        <h2 id="title">SKIN CODE GENERATOR</h2>
 
         <div>
-            <p id="gameInfo" onload="updateMeta()"></p>
+            <p id="gameInfo"></p>
+            <p>Might not be compatible with other versions or game branches.</p>
         </div>
-
+        <div class="divider"></div>
         <div class="form-group" style="margin-bottom: 20px;">
             <label for="importInput" style="flex: 0.8;">Import Code:</label>
             <input type="text" id="importInput" placeholder="Paste skin code here..."
@@ -217,13 +219,38 @@
         const outputDisplay = document.getElementById('outputCode');
         const copyBtn = document.getElementById('copyBtn');
 
+        const notLimitedDinosaurs = ['Omniraptor'];
+
+        onload = updateMeta;
+        function updateMeta() {
+            // Load manifest.json
+            fetch('manifest.json')
+                .then(response => response.json())
+                .then(data => {
+                    const gameInfo = document.getElementById('gameInfo');
+                    const title = document.getElementById('title');
+                    title.textContent = `SKIN CODE GENERATOR - Version ${data.version}`;
+                    gameInfo.textContent = `Developed for ${data.game.latest_tested_version} (${data.game.developed_for_game_branch})`;
+                })
+                .catch(error => {
+                    console.error('Error loading manifest.json:', error);
+                });
+        }
+
         function updateOmniraptorOnlySettings() {
-            const isOmniraptor = document.getElementById('species').value === 'Omniraptor';
+            const isNotLimited = notLimitedDinosaurs.includes(document.getElementById('species').value);
             ['color6', 'color7', 'color8'].forEach(id => {
                 const input = document.getElementById(id);
                 const group = input.closest('.form-group');
-                input.disabled = !isOmniraptor;
-                group.classList.toggle('disabled-setting', !isOmniraptor);
+                input.disabled = !isNotLimited;
+                group.classList.toggle('disabled-setting', !isNotLimited);
+                // Hide the color pickers when disabled to avoid confusion
+                input.style.display = isNotLimited ? 'block' : 'none';
+                // Also hide the labels for these inputs when disabled
+                const label = group.querySelector('label');
+                if (label) {
+                    label.style.display = isNotLimited ? 'block' : 'none';
+                }
             });
         }
 
