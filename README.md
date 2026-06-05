@@ -39,7 +39,7 @@ A lightweight, browser-based tool designed to generate custom skin codes for the
 ## 🧬 Code Structure
 
 The output string is concatenated in the exact reverse-color order required by the game engine:
-`[Species][Pattern][Variation][Claws][Claws][Teeth][Theme][Underbelly][Body][Flank][Markings][Male Display]`
+`[Species][Pattern][Variation][Theme][Claws][Mouth][Teeth][Underbelly][Body][Flank][Markings][Male Display]`
 
 *Example Output:*
 * `Omniraptor0108F3838FFEB4747FFBAB5B5FF5C5757FF704242FF711919FF0400FFFFFF0000FF`
