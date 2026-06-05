@@ -2,7 +2,7 @@
 
 // Simple HTML escaping to prevent XSS in the history table
 function escapeHTML(str) {
-    if (!str) return 'N/A';
+    if (str === null || str === undefined || str === '') return 'N/A';
     return String(str).replace(/[&<>'"]/g, match => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     }[match] || match));
@@ -14,13 +14,15 @@ function formatColor(hexString) {
 
 function getSwatchCell(colorCode, colourName = '') {
     if (!colorCode || colorCode === 'N/A') return '';
-    const swatchColor = '#' + colorCode.substring(0, 6);
+    const hex6 = String(colorCode).substring(0, 6);
+    if (!/^[0-9a-f]{6}$/i.test(hex6)) return '';
+    const swatchColor = `#${hex6}`;
     return `<span class="color-swatch" title="${swatchColor}" style="background-color: ${swatchColor};">${escapeHTML(colourName)}</span>`;
 }
 
 // --- GLOBAL VARIABLES ---
 
-const inputs = document.querySelectorAll('input, select');
+const inputs = document.querySelectorAll('input:not(#importInput), select');
 const outputDisplay = document.getElementById('outputCode');
 const copyBtn = document.getElementById('copyBtn');
 const notLimitedDinosaurs = ['Omniraptor'];
@@ -253,6 +255,7 @@ function renderHistoryTable() {
 
 function importFromHistory(index) {
     const history = JSON.parse(localStorage.getItem('history')) || [];
+    history.reverse();
     const entry = history[index];
 
     if (!entry) {
@@ -281,7 +284,7 @@ function addToHistory() {
         pattern: document.getElementById('pattern').value || '',
         variation: document.getElementById('variation').value || '',
         theme: document.getElementById('theme').value || '',
-        maleDisplay: code.substring(code.length - 8, code.length - 0),
+        maleDisplay: code.substring(code.length - 8, code.length),
         markings: code.substring(code.length - 16, code.length - 8),
         flank: code.substring(code.length - 24, code.length - 16),
         body: code.substring(code.length - 32, code.length - 24),
