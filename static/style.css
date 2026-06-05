@@ -108,7 +108,7 @@ button:hover {
     background-color: #3377ff;
 }
 
-@media (max-width: 90%) {
+@media (max-width: 900px) {
     .layout {
         flex-direction: column;
     }

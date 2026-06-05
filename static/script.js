@@ -283,9 +283,9 @@ function addToHistory() {
         flank: code.substring(code.length - 24, code.length - 16),
         body: code.substring(code.length - 32, code.length - 24),
         underbelly: code.substring(code.length - 40, code.length - 32),
-        teeth: code.length >= 64 ? code.substring(code.length - 48, code.length - 40) : null,
-        mouth: code.length >= 64 ? code.substring(code.length - 56, code.length - 48) : null,
-        claws: code.length >= 64 ? code.substring(code.length - 64, code.length - 56) : null
+        teeth: document.getElementById('species').value === 'Omniraptor' ? code.substring(code.length - 48, code.length - 40) : null,
+        mouth: document.getElementById('species').value === 'Omniraptor' ? code.substring(code.length - 56, code.length - 48) : null,
+        claws: document.getElementById('species').value === 'Omniraptor' ? code.substring(code.length - 64, code.length - 56) : null
     };
 
     currentHistory.push(dinoColors);
