@@ -221,7 +221,7 @@
 
         const notLimitedDinosaurs = ['Omniraptor'];
 
-        onload = updateMeta;
+        window.addEventListener('load', updateMeta);
         function updateMeta() {
             // Load manifest.json
             fetch('manifest.json')
@@ -244,13 +244,7 @@
                 const group = input.closest('.form-group');
                 input.disabled = !isNotLimited;
                 group.classList.toggle('disabled-setting', !isNotLimited);
-                // Hide the color pickers when disabled to avoid confusion
-                input.style.display = isNotLimited ? 'block' : 'none';
-                // Also hide the labels for these inputs when disabled
-                const label = group.querySelector('label');
-                if (label) {
-                    label.style.display = isNotLimited ? 'block' : 'none';
-                }
+                group.style.display = isNotLimited ? 'flex' : 'none';
             });
         }
 
